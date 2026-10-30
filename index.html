@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17120f">
+  <meta name="description" content="Maison Café — café, brunch et beaux moments. Découvrez notre univers, notre carte et notre ambiance.">
+  <title>Maison Café | Coffee, Brunch & Moments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #17120f;
+      --bg-soft: #211a15;
+      --card: #261e18;
+      --cream: #f5eadb;
+      --muted: #bcae9d;
+      --gold: #d6a56d;
+      --gold-light: #edc99e;
+      --line: rgba(245,234,219,.13);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { background: var(--bg); color: var(--cream); font-family: var(--sans); line-height: 1.7; }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: .72rem; font-weight: 700; }
+    .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--gold); }
+    .section { padding: 108px 0; }
+    .section-head { max-width: 650px; margin: 0 auto 52px; text-align: center; }
+    .section-head .eyebrow { justify-content: center; }
+    .section-head h2 { font: 600 clamp(2.25rem, 4.6vw, 3.5rem)/1.12 var(--serif); margin: 17px 0 15px; letter-spacing: -.7px; }
+    .section-head p { color: var(--muted); max-width: 520px; margin: auto; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 50px; padding: 0 23px; background: var(--gold); color: #21160f; border: 1px solid var(--gold); font-size: .83rem; font-weight: 700; letter-spacing: .3px; transition: .25s ease; }
+    .btn:hover { background: transparent; color: var(--gold-light); transform: translateY(-3px); box-shadow: 0 10px 28px #0004; }
+    .btn-outline { background: transparent; color: var(--cream); border-color: rgba(245,234,219,.35); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+    .arrow { font-size: 1.1rem; transition: transform .2s; }
+    .btn:hover .arrow { transform: translateX(4px); }
+
+    /* Navigation */
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(23,18,15,.9); border-bottom: 1px solid var(--line); backdrop-filter: blur(18px); }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .logo { font: 700 1.35rem var(--serif); letter-spacing: 1.1px; white-space: nowrap; }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 36px); color: #d1c3b3; font-size: .82rem; }
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+    .nav-cta { min-height: 44px; padding-inline: 18px; font-size: .76rem; }
+    .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); background: transparent; color: var(--cream); cursor: pointer; font-size: 1.35rem; }
+
+    /* Hero */
+    .hero { min-height: min(790px, calc(100svh - 82px)); display: flex; align-items: center; position: relative; isolation: isolate; overflow: hidden; background: #211811; }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=2000&q=90") center 52%/cover; transform: scale(1.02); animation: heroZoom 16s ease-in-out infinite alternate; }
+    .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(17,12,9,.96) 0%, rgba(17,12,9,.82) 43%, rgba(17,12,9,.26) 100%), linear-gradient(0deg, rgba(17,12,9,.55), transparent 45%); }
+    .hero-content { max-width: 700px; padding: 100px 0 120px; }
+    .hero-kicker { color: var(--gold-light); text-transform: uppercase; letter-spacing: 4px; font-size: .72rem; font-weight: 700; }
+    h1 { font: 600 clamp(3.6rem, 8.2vw, 7rem)/.99 var(--serif); letter-spacing: -2.5px; margin: 25px 0; }
+    h1 em { color: var(--gold-light); font-weight: 500; }
+    .hero-copy { max-width: 510px; color: #e2d6c9; font-size: 1.02rem; margin-bottom: 34px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+    .hero-note { display: flex; align-items: center; gap: 13px; margin-top: 58px; color: #d6c8b8; font-size: .76rem; letter-spacing: .5px; }
+    .hero-note::before { content: ""; width: 42px; height: 1px; background: var(--gold); }
+    .scroll-cue { position: absolute; right: max(24px, calc((100vw - var(--max))/2)); bottom: 34px; color: #e8d8c6; writing-mode: vertical-rl; font-size: .66rem; letter-spacing: 2px; text-transform: uppercase; }
+
+    /* Intro strip */
+    .features { border-bottom: 1px solid var(--line); background: #1c1612; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .feature { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 28px 18px; border-right: 1px solid var(--line); }
+    .feature:last-child { border: 0; }
+    .feature-icon { color: var(--gold); font-size: 1.3rem; }
+    .feature strong { display: block; font: 600 1rem var(--serif); }
+    .feature small { color: var(--muted); font-size: .72rem; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(42px, 8vw, 100px); align-items: center; }
+    .about-visual { position: relative; padding: 0 28px 28px 0; }
+    .about-visual::after { content: ""; position: absolute; right: 0; bottom: 0; width: 72%; height: 70%; border: 1px solid rgba(214,165,109,.55); z-index: -1; }
+    .about-img { width: 100%; height: 510px; object-fit: cover; }
+    .about-copy h2 { font: 600 clamp(2.4rem, 4.3vw, 3.8rem)/1.12 var(--serif); margin: 18px 0 23px; }
+    .about-copy p { color: var(--muted); margin-bottom: 17px; }
+    .about-copy .btn { margin-top: 13px; }
+    .signature { color: var(--gold-light); font: italic 1.35rem var(--serif); margin-top: 25px; }
+
+    /* Menu */
+    .menu-section { background: var(--bg-soft); border-block: 1px solid var(--line); }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .menu-card { background: #1a1511; border: 1px solid var(--line); overflow: hidden; transition: transform .3s, border-color .3s, box-shadow .3s; }
+    .menu-card:hover { transform: translateY(-8px); border-color: rgba(214,165,109,.55); box-shadow: 0 20px 45px #0003; }
+    .menu-image { height: 245px; overflow: hidden; position: relative; }
+    .menu-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .65s; }
+    .menu-card:hover .menu-image img { transform: scale(1.07); }
+    .menu-info { padding: 23px 24px 25px; }
+    .menu-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .menu-info h3 { font: 600 1.35rem var(--serif); }
+    .price { color: var(--gold-light); font-weight: 700; white-space: nowrap; font-size: .88rem; }
+    .menu-info p { color: var(--muted); font-size: .85rem; margin-top: 9px; }
+    .menu-footnote { text-align: center; color: #968675; font-size: .72rem; margin-top: 24px; }
+
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 15px; }
+    .gallery-item { overflow: hidden; position: relative; background: var(--card); }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item::after { content: ""; position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, #100b08a8); opacity: .65; pointer-events: none; }
+
+    /* Visit */
+    .visit-section { background: var(--bg-soft); border-top: 1px solid var(--line); }
+    .visit-panel { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
+    .visit-card { padding: clamp(28px, 5vw, 52px); }
+    .visit-card + .visit-card { border-left: 1px solid var(--line); background: #1c1612; }
+    .visit-card h3 { color: var(--gold-light); font: 600 1.55rem var(--serif); margin-bottom: 22px; }
+    .detail { display: flex; gap: 14px; margin: 16px 0; color: var(--muted); font-size: .9rem; }
+    .detail span:first-child { color: var(--gold); width: 22px; flex: 0 0 22px; }
+    .visit-card .btn { margin-top: 18px; }
+    .placeholder-note { color: #9f8e7c; font-size: .72rem; margin-top: 18px; font-style: italic; }
+
+    /* Footer */
+    footer { padding: 30px 0; border-top: 1px solid var(--line); color: #9f9182; font-size: .77rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-logo { font: 600 1.1rem var(--serif); color: var(--cream); }
+    .footer-logo span { color: var(--gold); }
+    .back-top { color: var(--gold-light); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes heroZoom { from { transform: scale(1.02); } to { transform: scale(1.09); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+
+    @media (max-width: 850px) {
+      .nav { min-height: 74px; }
+      .nav-links { gap: 17px; font-size: .76rem; }
+      .nav-cta { display: none; }
+      .about-grid { gap: 42px; }
+      .about-img { height: 430px; }
+      .menu-grid { gap: 14px; }
+      .menu-image { height: 200px; }
+      .menu-info { padding: 18px; }
+      .menu-top { display: block; }
+      .price { display: inline-block; margin-top: 7px; }
+      .gallery-grid { grid-template-rows: 180px 180px; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(100% - 36px, var(--max)); }
+      .section { padding: 76px 0; }
+      .nav { min-height: 70px; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: fixed; inset: 70px 0 auto; padding: 22px 24px 28px; background: #17120f; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; font-size: .95rem; box-shadow: 0 18px 25px #0005; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 13px 0; border-bottom: 1px solid var(--line); }
+      .hero { min-height: 690px; min-height: 78svh; }
+      .hero::after { background: linear-gradient(90deg, rgba(17,12,9,.9), rgba(17,12,9,.48)), linear-gradient(0deg, rgba(17,12,9,.6), transparent 65%); }
+      .hero-content { padding: 85px 0 105px; }
+      h1 { font-size: clamp(3.55rem, 16vw, 5.3rem); letter-spacing: -1.8px; }
+      .hero-copy { font-size: .94rem; }
+      .hero-note { margin-top: 42px; }
+      .scroll-cue { display: none; }
+      .features-grid { grid-template-columns: 1fr; padding: 8px 0; }
+      .feature { justify-content: flex-start; padding: 14px 5px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .feature:last-child { border-bottom: 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 38px; }
+      .about-visual { padding: 0 17px 17px 0; }
+      .about-img { height: 340px; }
+      .about-copy h2 { font-size: 2.55rem; }
+      .menu-grid { grid-template-columns: 1fr; gap: 18px; }
+      .menu-image { height: 245px; }
+      .menu-top { display: flex; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 230px 150px 150px; gap: 10px; }
+      .gallery-item:first-child { grid-row: auto; grid-column: span 2; }
+      .visit-panel { grid-template-columns: 1fr; }
+      .visit-card + .visit-card { border-left: 0; border-top: 1px solid var(--line); }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="#home" aria-label="Maison Café, accueil">MAISON<span>.</span>CAFÉ</a>
+      <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
+        <a href="#home">Accueil</a><a href="#about">À propos</a><a href="#menu">Menu</a><a href="#gallery">Galerie</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="btn nav-cta" href="#contact">Nous trouver <span class="arrow">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-kicker">Café · Brunch · Moments</div>
+          <h1>Le goût des<br><em>bons moments.</em></h1>
+          <p class="hero-copy">Un café soigneusement préparé, une ambiance chaleureuse et une petite pause qui fait toute la différence. Bienvenue chez Maison Café.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#menu">Découvrir le menu <span class="arrow">→</span></a>
+            <a class="btn btn-outline" href="#about">Notre histoire</a>
+          </div>
+          <div class="hero-note">Prenez le temps. Savourez l’instant.</div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#about">Défiler ↓</a>
+    </section>
+
+    <div class="features">
+      <div class="container features-grid">
+        <div class="feature"><span class="feature-icon">✳</span><div><strong>Café de qualité</strong><small>Une pause pleine de caractère</small></div></div>
+        <div class="feature"><span class="feature-icon">♧</span><div><strong>Ambiance chaleureuse</strong><small>Un lieu où l’on se sent bien</small></div></div>
+        <div class="feature"><span class="feature-icon">♡</span><div><strong>Fait avec passion</strong><small>Le plaisir dans chaque détail</small></div></div>
+      </div>
+    </div>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-visual reveal">
+          <img class="about-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1100&q=90" alt="Tasses de café et grains fraîchement préparés" loading="lazy">
+        </div>
+        <div class="about-copy reveal">
+          <div class="eyebrow">Notre histoire</div>
+          <h2>Un endroit pour ralentir et savourer.</h2>
+          <p>Chez Maison Café, nous croyons que les meilleurs souvenirs commencent souvent autour d’une bonne tasse de café.</p>
+          <p>Des grains sélectionnés, des ingrédients frais et une équipe qui vous accueille avec le sourire : tout est pensé pour vous faire sentir chez vous.</p>
+          <a class="btn" href="#contact">Passez nous voir <span class="arrow">→</span></a>
+          <div class="signature">Les petits moments font les grands souvenirs.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="menu">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">À découvrir</div>
+          <h2>Les favoris de la maison</h2>
+          <p>Une petite sélection de boissons et douceurs pour accompagner vos plus beaux moments.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card reveal">
+            <div class="menu-image"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=85" alt="Café latte" loading="lazy"></div>
+            <div class="menu-info"><div class="menu-top"><h3>Café Latte</h3><span class="price">7.500 DT</span></div><p>Un espresso doux accompagné d’un lait délicatement moussé.</p></div>
+          </article>
+          <article class="menu-card reveal">
+            <div class="menu-image"><img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=85" alt="Cappuccino crémeux" loading="lazy"></div>
+            <div class="menu-info"><div class="menu-top"><h3>Cappuccino</h3><span class="price">6.500 DT</span></div><p>Un équilibre généreux entre espresso intense et mousse légère.</p></div>
+          </article>
+          <article class="menu-card reveal">
+            <div class="menu-image"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85" alt="Croissant doré" loading="lazy"></div>
+            <div class="menu-info"><div class="menu-top"><h3>Croissant frais</h3><span class="price">4.000 DT</span></div><p>Une douceur dorée et croustillante, parfaite à tout moment.</p></div>
+          </article>
+        </div>
+        <p class="menu-footnote">Carte de démonstration — produits et prix à confirmer avec l’établissement.</p>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">L’ambiance</div>
+          <h2>Un petit aperçu</h2>
+          <p>Des instants simples, une atmosphère douce et le plaisir de se retrouver.</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=85" alt="Barista préparant un café" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=800&q=85" alt="Intérieur chaleureux d’un café" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1493857671505-72967e2e2760?auto=format&fit=crop&w=800&q=85" alt="Table accueillante dans un café" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=85" alt="Espace café lumineux" loading="lazy"></div>
+          <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=85" alt="Tasse de café fraîchement servi" loading="lazy"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section visit-section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">On vous attend</div>
+          <h2>Votre prochaine pause commence ici.</h2>
+          <p>Une envie de café ? Retrouvez ici toutes les informations pratiques de la maison.</p>
+        </div>
+        <div class="visit-panel reveal">
+          <div class="visit-card">
+            <h3>Contact & adresse</h3>
+            <div class="detail"><span>⌖</span><span>Adresse à personnaliser</span></div>
+            <div class="detail"><span>☎</span><span>Numéro de téléphone à ajouter</span></div>
+            <div class="detail"><span>✉</span><span>Adresse e-mail à ajouter</span></div>
+            <p class="placeholder-note">Les coordonnées affichées sont des champs de démonstration à remplacer avant livraison.</p>
+          </div>
+          <div class="visit-card">
+            <h3>Horaires d’ouverture</h3>
+            <div class="detail"><span>◷</span><span>Du lundi au vendredi : horaires à confirmer</span></div>
+            <div class="detail"><span>◷</span><span>Samedi & dimanche : horaires à confirmer</span></div>
+            <a class="btn btn-outline" href="mailto:bonjour@maisoncafe.tn">Nous contacter <span class="arrow">↗</span></a>
+            <p class="placeholder-note">Le lien e-mail est provisoire et doit être remplacé par le contact réel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="footer-logo" href="#home">MAISON<span>.</span>CAFÉ</a>
+      <p>© <span id="year"></span> Maison Café — Tous droits réservés.</p>
+      <a class="back-top" href="#home">Retour en haut ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById("menuToggle");
+    const links = document.getElementById("navLinks");
+
+    toggle.addEventListener("click", () => {
+      const isOpen = links.classList.toggle("open");
+      document.body.classList.toggle("menu-open", isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+      toggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    links.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        links.classList.remove("open");
+        document.body.classList.remove("menu-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Ouvrir le menu");
+        toggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
+
+    const sections = document.querySelectorAll("main section[id]");
+    const navAnchors = document.querySelectorAll(".nav-links a");
+    const activeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navAnchors.forEach(anchor => {
+            anchor.classList.toggle("active", anchor.getAttribute("href") === "#" + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    sections.forEach(section => activeObserver.observe(section));
+  </script>
+</body>
+</html>
